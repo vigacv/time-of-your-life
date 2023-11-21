@@ -4,6 +4,19 @@
 
 Time of Your Life is a project that will always be in "progress".  It's got a little bit of a start, but is intentionally left with need of feature implementations to get it to an [MVP] state.
 
+## How to Develop
+
+Time of Your Life is built on these technologies:
+
+- .Net 7
+- React JS
+
+To develop on this project clone this project, and open with an IDE of your choice. VS Code or Visual Studio 2019 or newer is recommended.
+
+The project can be run from the command line using the command `dotnet run`.  The service and application hosting can be stopped by pressing `Ctrl+C` on Windows and Linux, or `Cmd+C` on macOS.
+
+Changes to the React Client Side SPA, will be reflected in the UI in a hot load manner. Changes to the .Net server components will require a recompile, `dotnet build` and restart, `dotnet run`.
+
 ## TODOs
 
 ### Easier
