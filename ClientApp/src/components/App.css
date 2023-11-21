@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+}
+
+#Clock {
+  border: 1px solid black;
+  float: left;
+  width: 59%;
+  min-height: 600px;
+  vertical-align: middle;
+}
+
+#Digits {
+  border: 1px solid blue;
+}
+
+#ClockProps {
+  border: 1px solid gray;
+  float: right;
+  width: 40%;
+  min-height: 600px;
+}
