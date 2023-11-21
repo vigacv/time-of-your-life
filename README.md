@@ -58,7 +58,7 @@ Time of Your Life is a project that will always be in "progress".  It's got a li
 #### Server
 
 - [ ] Implement a [sqlite] database storage layer
-- [ ] Save alarms and populat the alarms on the clock
+- [ ] Save alarms and populate the alarms on the clock
 - [ ] Add a testing results output report
 
 <!-- links -->
