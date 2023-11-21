@@ -8,8 +8,8 @@ Time of Your Life is a project that will always be in "progress".  It's got a li
 
 Time of Your Life is built on these technologies:
 
-- .Net 7
-- React JS
+- [.NET 8]
+- [React JS]
 
 To develop on this project clone this project, and open with an IDE of your choice. VS Code or Visual Studio 2019 or newer is recommended.
 
@@ -79,3 +79,5 @@ Changes to the React Client Side SPA, will be reflected in the UI in a hot load 
 
 [MVP]: https://www.agilealliance.org/glossary/mvp/ "AGILE GLOSSARY: Minimum Viable Product (MVP)"
 [sqlite]: https://www.sqlite.org/index.html "What Is SQLite"
+[.NET 8]: https://dotnet.microsoft.com/en-us/download "Download .NET"
+[React JS]: https://react.dev/ "React: The library for web and native user interfaces"
