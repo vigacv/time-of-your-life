@@ -45,6 +45,7 @@ Time of Your Life is a project that will always be in "progress".  It's got a li
 - [ ] Return a preset by the title ID
 - [ ] Add the ability to update existing presets with changes in values
 - [ ] Add unit tests
+- [ ] Add `ClockController` logging
 
 ### Harder
 
