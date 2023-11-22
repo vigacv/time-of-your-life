@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 
 function Clock(props) {
   const [date, setDate] = useState(new Date())
+
+
   function refreshClock() {
     setDate(new Date())
   }
@@ -31,8 +33,6 @@ function Clock(props) {
     fontSize: `${props.clockProps.clockFontSize}pt`,
   }
 
-  // console.log('clockStyle', clockStyle)
-
   return (
     <div id="Clock">
       <div id="Digits" style={displayStyle}>
@@ -44,6 +44,7 @@ function Clock(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
+
 export default Clock

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ClockProps from './ClockProps'
 
 function SetClockProps(props) {
@@ -6,6 +6,18 @@ function SetClockProps(props) {
   const [fontFamily, setFontFamily] = useState(clockProps.fontFamily)
   const [fontColor, setFontColor] = useState(clockProps.fontColor)
   const [blinkColons, setBlinkColons] = useState(clockProps.blinkColons)
+  const [presets, setPresets] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(async () => {
+    (async () => {
+      const response = await fetch('clock/presets');
+      const data = await response.json();
+      setPresets(data);
+      setLoading(false);
+      console.log("loaded");
+    })();
+  },[])
 
   const getProps = () => {
     const props = new ClockProps()
@@ -48,6 +60,15 @@ function SetClockProps(props) {
     clockProps.blinkColons = document.getElementById('blinkColons').checked
     setClockProps()
   }
+
+  const presetsDisplay = (() => {
+    console.log('presets', presets);
+    return loading ?
+      <div>This is a good place to display and use the presets stored on the sever.</div> :
+      <div>Loaded.</div>;
+  })();
+
+  console.log(presetsDisplay);
 
   return (
     <div id="ClockProps" style={{ overflow: 'auto' }}>
@@ -135,10 +156,7 @@ function SetClockProps(props) {
         <hr />
         <div>
           <h2>Presets</h2>
-          <div>
-            This is a good place to display and use the presets stored on the
-            sever.
-          </div>
+          <div>{presetsDisplay}</div>
         </div>
       </div>
     </div>
