@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ClockProps from './ClockProps'
 
 function SetClockProps(props) {
@@ -6,6 +6,17 @@ function SetClockProps(props) {
   const [fontFamily, setFontFamily] = useState(clockProps.fontFamily)
   const [fontColor, setFontColor] = useState(clockProps.fontColor)
   const [blinkColons, setBlinkColons] = useState(clockProps.blinkColons)
+  const [presets, setPresets] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    ;(async () => {
+      const response = await fetch('clock/presets')
+      const data = await response.json()
+      setPresets(data)
+      setLoading(false)
+    })()
+  }, [])
 
   const getProps = () => {
     const props = new ClockProps()
@@ -19,7 +30,6 @@ function SetClockProps(props) {
 
   const setClockProps = () => {
     const setProps = getProps()
-    console.log('setProps', setProps)
     props.setClockProps(setProps)
   }
 
@@ -49,6 +59,24 @@ function SetClockProps(props) {
     setClockProps()
   }
 
+  const presetsDisplay = (() => {
+    console.log(presets)
+    return loading ? (
+      <div>
+        This is a good place to display and use the presets stored on the sever.
+      </div>
+    ) : (
+      <ul>
+        {presets.map((p, i) => (
+          <li>
+            Preset {i + 1}:{' '}
+            {`Font: ${p.fontFamily}, Color: ${p.fontColor}, Title Size: ${p.titleFontSize}, Clock Size: ${p.clockFontSize}`}
+          </li>
+        ))}
+      </ul>
+    )
+  })()
+
   return (
     <div id="ClockProps" style={{ overflow: 'auto' }}>
       <div
@@ -60,7 +88,16 @@ function SetClockProps(props) {
           fontSize: '20pt',
         }}
       >
-        <a style={{ cursor: 'pointer' }}>+/-</a>
+        <a
+          style={{ cursor: 'pointer' }}
+          onClick={() =>
+            alert(
+              'This the button that would expand or collapse the settings panel.'
+            )
+          }
+        >
+          +/-
+        </a>
       </div>
       <div>
         <div>
@@ -135,10 +172,7 @@ function SetClockProps(props) {
         <hr />
         <div>
           <h2>Presets</h2>
-          <div>
-            This is a good place to display and use the presets stored on the
-            sever.
-          </div>
+          <div>{presetsDisplay}</div>
         </div>
       </div>
     </div>

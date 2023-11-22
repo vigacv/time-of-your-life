@@ -1,19 +1,10 @@
-class ClockProps {
-  fontFamily = 'courier'
-  availableFontSizes = [12, 24, 48, 64]
-  titleFontSize = 64
-  clockFontSize = 48
-  blinkColons = true
-  fontColor = 'black'
-
-  props = {
-    fontFamily: this.fontFamily,
-    titleFontSize: this.titleFontSize,
-    clockFontSize: this.clockFontSize,
-    blinkColons: this.blinkColons,
-    availableFontSizes: this.availableFontSizes,
-    fontColor: this.fontColor,
+export default class ClockProps {
+  constructor() {
+    this.fontFamily = 'courier'
+    this.availableFontSizes = [12, 24, 48, 64]
+    this.titleFontSize = 64
+    this.clockFontSize = 48
+    this.blinkColons = true
+    this.fontColor = 'black'
   }
 }
-
-export default ClockProps
