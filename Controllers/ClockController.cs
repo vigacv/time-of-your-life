@@ -8,15 +8,13 @@ namespace time.Controllers;
 [Route("[controller]")]
 public class ClockController : ControllerBase
 {
-    private static List<ClockProps> _presets = new List<ClockProps>();
+    private static List<ClockProps> _presets = new List<ClockProps>(){ new() };
 
     private readonly ILogger<ClockController> _logger;
 
     public ClockController(ILogger<ClockController> logger)
     {
         _logger = logger;
-        _presets.Add(new());
-
     }
 
     [HttpGet, Route("presets")]
