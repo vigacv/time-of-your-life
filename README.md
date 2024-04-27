@@ -4,6 +4,12 @@
 
 Time of Your Life is a project that will always be in "progress".  It's got a little bit of a start, but is intentionally left with need of feature implementations to get it to an [MVP] state.
 
+The Time of Your Life project is designed to be a starting point for developers to show what kind of skills they've picked up over time.  There are many different enhancements suggested for this project.  They allow a developer to give a good idea of their ability to handle data design, backend components or client-side interface development tasks.
+
+While it is important to see what kind of quality features and improvements a developer can add,  it is just as important to show a consistent commit history with clear concise commit comments in either a fork or branch of this repository. Seeing how a developer works over time provides a lot of insight into their experience and ability to work through coding problems.
+
+This project was bootstrapped with [Create React App].  It uses a [.Net 8] Web Application to host a [React JS] framework client.
+
 ## How to Develop
 
 Time of Your Life is built on these technologies:
@@ -79,6 +85,7 @@ Changes to the React Client Side SPA, will be reflected in the UI in a hot load 
 
 <!-- links -->
 
+[Create React App]: https://github.com/facebookincubator/create-react-app "Create React App"
 [MVP]: https://www.agilealliance.org/glossary/mvp/ "AGILE GLOSSARY: Minimum Viable Product (MVP)"
 [sqlite]: https://www.sqlite.org/index.html "What Is SQLite"
 [.NET 8]: https://dotnet.microsoft.com/en-us/download "Download .NET"
