@@ -1,6 +1,8 @@
 namespace time.Controllers;
 
 public class ClockProps {
+  public Guid Id {get; set;} = Guid.NewGuid();
+  public string Title {get; set;} = "The Time of Your Life";
   public string FontFamily {get; set;} = "courier";
   public int[] AvailableFontSizes {get; }  = new[] { 12, 24, 48, 64 };
   public int TitleFontSize {get; set;} = 64;

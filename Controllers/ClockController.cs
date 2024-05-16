@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using time.Models;
 
 namespace time.Controllers;
 
@@ -24,9 +25,17 @@ public class ClockController : ControllerBase
     }
 
     [HttpPost("presets")]
-    public ClockProps AddPreset([FromBody]ClockProps preset)
+    public ClockProps AddPreset([FromBody]SaveClockPropsRequest preset)
     {
-        _presets.Add(preset);
-        return preset;
+        ClockProps clockProps = new ClockProps
+        {
+            FontFamily = preset.FontFamily,
+            TitleFontSize = preset.TitleFontSize,
+            ClockFontSize = preset.ClockFontSize,
+            BlinkColons = preset.BlinkColons,
+            FontColor = preset.FontColor
+        };
+        _presets.Add(clockProps);
+        return clockProps;
     }
 }
