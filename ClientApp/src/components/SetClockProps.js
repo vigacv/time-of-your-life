@@ -3,15 +3,17 @@ import ClockProps from './ClockProps'
 
 function SetClockProps(props) {
   const clockProps = new ClockProps()
-  const [fontFamily, setFontFamily] = useState(clockProps.fontFamily)
-  const [fontColor, setFontColor] = useState(clockProps.fontColor)
-  const [blinkColons, setBlinkColons] = useState(clockProps.blinkColons)
   const [presets, setPresets] = useState([])
   const [loading, setLoading] = useState(true)
   const titleRef = useRef(null)
+  const fontFamilyRef = useRef(null)
+  const fontColorRef = useRef(null)
+  const titleFontSizeRef = useRef(null)
+  const clockFontSizeRef = useRef(null)
+  const blinkColonsRef = useRef(null)
 
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       const response = await fetch('clock/presets')
       const data = await response.json()
       setPresets(data)
@@ -21,11 +23,11 @@ function SetClockProps(props) {
 
   const getProps = () => {
     const props = new ClockProps()
-    props.fontFamily = document.getElementById('fontFamily').value
-    props.titleFontSize = document.getElementById('titleFontSize').value
-    props.clockFontSize = document.getElementById('clockFontSize').value
-    props.fontColor = document.getElementById('fontColor').value
-    props.blinkColons = document.getElementById('blinkColons').checked
+    props.fontFamily = fontFamilyRef.current.value
+    props.titleFontSize = titleFontSizeRef.current.value
+    props.clockFontSize = clockFontSizeRef.current.value
+    props.fontColor = fontColorRef.current.value
+    props.blinkColons = blinkColonsRef.current.checked
     props.title = titleRef.current.value
     return props
   }
@@ -38,27 +40,8 @@ function SetClockProps(props) {
   const fontSizeOptions = (selctedSize) => {
     return clockProps.availableFontSizes.map((size) => {
       var option = <option>{size}</option>
-      if (size === selctedSize) {
-        option = <option selected>{size}</option>
-      }
       return option
     })
-  }
-
-  const setFontFamilyUI = () => {
-    setFontFamily(document.getElementById('fontFamily').value)
-    clockProps.fontFamily = document.getElementById('fontFamily').value
-  }
-
-  const setFontColurUI = (e) => {
-    setFontColor(document.getElementById('fontColor').value)
-    clockProps.fontColor = document.getElementById('fontColor').value
-  }
-
-  const setBlinkColonsUI = () => {
-    setBlinkColons(document.getElementById('blinkColons').checked)
-    clockProps.blinkColons = document.getElementById('blinkColons').checked
-    setClockProps()
   }
 
   const handleEnter = (event) => {
@@ -132,8 +115,8 @@ function SetClockProps(props) {
             <div>
               <input
                 id="fontFamily"
-                value={fontFamily}
-                onChange={setFontFamilyUI}
+                defaultValue={clockProps.fontFamily}
+                ref={fontFamilyRef}
                 onKeyDown={handleEnter}
               />
               <button onClick={setClockProps}>✓</button>
@@ -142,7 +125,7 @@ function SetClockProps(props) {
           <div>
             <div>Title Font Size</div>
             <div>
-              <select id="titleFontSize" onChange={setClockProps}>
+              <select id="titleFontSize" ref={titleFontSizeRef} defaultValue={clockProps.titleFontSize} onChange={setClockProps}>
                 {fontSizeOptions(clockProps.titleFontSize)}
               </select>
             </div>
@@ -150,7 +133,7 @@ function SetClockProps(props) {
           <div>
             <div>Clock Font Size</div>
             <div>
-              <select id="clockFontSize" onChange={setClockProps}>
+              <select id="clockFontSize" ref={clockFontSizeRef} defaultValue={clockProps.clockFontSize} onChange={setClockProps}>
                 {fontSizeOptions(clockProps.clockFontSize)}
               </select>
             </div>
@@ -160,8 +143,8 @@ function SetClockProps(props) {
             <div>
               <input
                 id="fontColor"
-                value={fontColor}
-                onChange={(e) => setFontColurUI(e)}
+                defaultValue={clockProps.fontColor}
+                ref={fontColorRef}
                 onKeyDown={handleEnter}
               />
               <button onClick={setClockProps}>✓</button>
@@ -172,9 +155,10 @@ function SetClockProps(props) {
             <div>
               <input
                 id="blinkColons"
-                checked={blinkColons}
+                defaultChecked={clockProps.blinkColons}
+                onChange={setClockProps}
+                ref={blinkColonsRef}
                 type="checkbox"
-                onChange={setBlinkColonsUI}
               />
             </div>
           </div>
