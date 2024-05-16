@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import ClockProps from './ClockProps'
 
 function SetClockProps(props) {
@@ -8,6 +8,7 @@ function SetClockProps(props) {
   const [blinkColons, setBlinkColons] = useState(clockProps.blinkColons)
   const [presets, setPresets] = useState([])
   const [loading, setLoading] = useState(true)
+  const titleRef = useRef(null)
 
   useEffect(() => {
     ;(async () => {
@@ -25,6 +26,7 @@ function SetClockProps(props) {
     props.clockFontSize = document.getElementById('clockFontSize').value
     props.fontColor = document.getElementById('fontColor').value
     props.blinkColons = document.getElementById('blinkColons').checked
+    props.title = titleRef.current.value
     return props
   }
 
@@ -107,6 +109,16 @@ function SetClockProps(props) {
         <div>
           <div>
             <h2>Settings</h2>
+          </div>
+          <div>
+            <div>Title</div>
+            <div>
+              <input
+                defaultValue={clockProps.title}
+                ref={titleRef}
+              />
+              <button onClick={setClockProps}>✓</button>
+            </div>
           </div>
           <div>
             <div>Font Family</div>
