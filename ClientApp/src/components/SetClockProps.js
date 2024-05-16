@@ -61,6 +61,12 @@ function SetClockProps(props) {
     setClockProps()
   }
 
+  const handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      setClockProps()
+    }
+  }
+
   const presetsDisplay = (() => {
     console.log(presets)
     return loading ? (
@@ -116,6 +122,7 @@ function SetClockProps(props) {
               <input
                 defaultValue={clockProps.title}
                 ref={titleRef}
+                onKeyDown={handleEnter}
               />
               <button onClick={setClockProps}>✓</button>
             </div>
@@ -127,6 +134,7 @@ function SetClockProps(props) {
                 id="fontFamily"
                 value={fontFamily}
                 onChange={setFontFamilyUI}
+                onKeyDown={handleEnter}
               />
               <button onClick={setClockProps}>✓</button>
             </div>
@@ -154,6 +162,7 @@ function SetClockProps(props) {
                 id="fontColor"
                 value={fontColor}
                 onChange={(e) => setFontColurUI(e)}
+                onKeyDown={handleEnter}
               />
               <button onClick={setClockProps}>✓</button>
             </div>
