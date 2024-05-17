@@ -88,6 +88,10 @@ function SetClockProps(props) {
       })
   }
 
+  const setPresetToClock = (preset) => {
+    props.setClockProps(preset)
+  }
+
   const presetsDisplay = (() => {
     console.log(presets)
     return loading ? (
@@ -97,10 +101,11 @@ function SetClockProps(props) {
     ) : (
       <ul>
         {presets.map((p, i) => (
-          <li key={p.id}>
+          <li key={p.id} style={{marginBottom: 10}}>
             Preset {i + 1}:{' '}
             {`Font: ${p.fontFamily}, Title Color: ${p.titleFontColor}, Title Size: ${p.titleFontSize},
              Clock Size: ${p.clockFontSize}, Clock Color: ${p.clockFontColor}, Blink Colons: ${p.blinkColons}`}
+             <button onClick={() => setPresetToClock(p)}>Select preset</button>
           </li>
         ))}
       </ul>

@@ -5,7 +5,7 @@
 #Clock {
   border: 1px solid black;
   float: left;
-  width: 59%;
+  width: 50%;
   min-height: 600px;
   vertical-align: middle;
 }
@@ -13,6 +13,6 @@
 #ClockProps {
   border: 1px solid gray;
   float: right;
-  width: 40%;
+  width: 49%;
   min-height: 600px;
 }
