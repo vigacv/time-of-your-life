@@ -27,7 +27,7 @@ public class ClockController : ControllerBase
     [HttpGet, Route("presets/{id}")]
     public IActionResult GetPreset(Guid id)
     {
-        var clockProps = _presets.FirstOrDefault(p => p.Id == id);
+        ClockProps? clockProps = _presets.FirstOrDefault(p => p.Id == id);
 
         if (clockProps == null)
         {
@@ -51,5 +51,28 @@ public class ClockController : ControllerBase
         };
         _presets.Add(clockProps);
         return clockProps;
+    }
+
+    [HttpPut("presets/{id}")]
+    public IActionResult UpdatePreset(Guid id, [FromBody]SaveClockPropsRequest preset)
+    {
+        int index = _presets.FindIndex(p => p.Id == id);
+
+        if (index == -1)
+        {
+            return NotFound();
+        }
+
+        ClockProps clockProps = _presets[index];
+        
+        clockProps.Title = preset.Title;
+        clockProps.FontFamily = preset.FontFamily;
+        clockProps.TitleFontSize = preset.TitleFontSize;
+        clockProps.ClockFontSize = preset.ClockFontSize;
+        clockProps.TitleFontColor = preset.TitleFontColor;
+        clockProps.ClockFontColor = preset.ClockFontColor;
+        clockProps.BlinkColons = preset.BlinkColons;
+
+        return Ok(clockProps);
     }
 }
