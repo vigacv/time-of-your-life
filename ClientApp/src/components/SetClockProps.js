@@ -150,6 +150,7 @@ function SetClockProps(props) {
                 defaultValue={clockProps.title}
                 ref={titleRef}
                 onKeyDown={handleEnter}
+                maxLength={50}
               />
               <button onClick={setClockProps}>✓</button>
             </div>
@@ -162,6 +163,7 @@ function SetClockProps(props) {
                 defaultValue={clockProps.fontFamily}
                 ref={fontFamilyRef}
                 onKeyDown={handleEnter}
+                maxLength={50}
               />
               <button onClick={setClockProps}>✓</button>
             </div>
@@ -169,14 +171,14 @@ function SetClockProps(props) {
           <div>
             <div>Title Font Size</div>
             <div>
-              <input type='range' min='8' max='72' value={titleFontSize} onChange={setTitleFontSizeUI} />
+              <input type='range' min='1' max='100' value={titleFontSize} onChange={setTitleFontSizeUI} />
               <span>{titleFontSize}</span>
             </div>
           </div>
           <div>
             <div>Clock Font Size</div>
             <div>
-              <input type='range' min='8' max='72' value={clockFontSize} onChange={setClockFontSizeUI} />
+              <input type='range' min='1' max='100' value={clockFontSize} onChange={setClockFontSizeUI} />
               <span>{clockFontSize}</span>
             </div>
           </div>
@@ -187,6 +189,7 @@ function SetClockProps(props) {
                 id="titleFontColor"
                 value={titleFontColor}
                 readOnly
+                maxLength={50}
                 onKeyDown={handleEnter}
               />
               {/* <button onClick={() => setTitleFontColorUI(titleFontColorRef.current.value)}>✓</button> */}
@@ -200,6 +203,7 @@ function SetClockProps(props) {
                 id="clockFontColor"
                 value={clockFontColor}
                 readOnly
+                maxLength={50}
                 onKeyDown={handleEnter}
               />
               {/* <button onClick={setClockProps}>✓</button> */}
