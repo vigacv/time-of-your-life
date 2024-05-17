@@ -24,6 +24,19 @@ public class ClockController : ControllerBase
         return _presets.ToArray();
     }
 
+    [HttpGet, Route("presets/{id}")]
+    public IActionResult GetPreset(Guid id)
+    {
+        var clockProps = _presets.FirstOrDefault(p => p.Id == id);
+
+        if (clockProps == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(clockProps);
+    }
+
     [HttpPost("presets")]
     public ClockProps AddPreset([FromBody]SaveClockPropsRequest preset)
     {
