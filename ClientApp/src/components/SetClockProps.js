@@ -7,10 +7,10 @@ function SetClockProps(props) {
   const [loading, setLoading] = useState(true)
   const [titleFontSize, setTitleFontSize] = useState(clockProps.titleFontSize)
   const [clockFontSize, setClockFontSize] = useState(clockProps.clockFontSize)
+  const [titleFontColor, setTitleFontColor] = useState(clockProps.titleFontColor)
+  const [clockFontColor, setClockFontColor] = useState(clockProps.clockFontColor)
   const titleRef = useRef(null)
   const fontFamilyRef = useRef(null)
-  const titleFontColorRef = useRef(null)
-  const clockFontColorRef = useRef(null)
   const blinkColonsRef = useRef(null)
 
   useEffect(() => {
@@ -27,8 +27,8 @@ function SetClockProps(props) {
     props.fontFamily = fontFamilyRef.current.value
     props.titleFontSize = titleFontSize
     props.clockFontSize = clockFontSize
-    props.titleFontColor = titleFontColorRef.current.value
-    props.clockFontColor = clockFontColorRef.current.value
+    props.titleFontColor = titleFontColor
+    props.clockFontColor = clockFontColor
     props.blinkColons = blinkColonsRef.current.checked
     props.title = titleRef.current.value
     return props
@@ -46,6 +46,16 @@ function SetClockProps(props) {
 
   const setClockFontSizeUI = (event) => {
     setClockFontSize(event.target.value)
+    setClockProps()
+  }
+
+  const setTitleFontColorUI = (event) => {
+    setTitleFontColor(event.target.value)
+    setClockProps()
+  }
+
+  const setClockFontColorUI = (event) => {
+    setClockFontColor(event.target.value)
     setClockProps()
   }
 
@@ -153,7 +163,7 @@ function SetClockProps(props) {
           <div>
             <div>Title Font Size</div>
             <div>
-              <input type='range'  min='8' max='72' value={titleFontSize} onChange={setTitleFontSizeUI} />
+              <input type='range' min='8' max='72' value={titleFontSize} onChange={setTitleFontSizeUI} />
               <span>{titleFontSize}</span>
             </div>
           </div>
@@ -169,11 +179,12 @@ function SetClockProps(props) {
             <div>
               <input
                 id="titleFontColor"
-                defaultValue={clockProps.titleFontColor}
-                ref={titleFontColorRef}
+                value={titleFontColor}
+                readOnly
                 onKeyDown={handleEnter}
               />
-              <button onClick={setClockProps}>✓</button>
+              {/* <button onClick={() => setTitleFontColorUI(titleFontColorRef.current.value)}>✓</button> */}
+              <input type='color' value={titleFontColor} onChange={setTitleFontColorUI} />
             </div>
           </div>
           <div>
@@ -181,11 +192,12 @@ function SetClockProps(props) {
             <div>
               <input
                 id="clockFontColor"
-                defaultValue={clockProps.clockFontColor}
-                ref={clockFontColorRef}
+                value={clockFontColor}
+                readOnly
                 onKeyDown={handleEnter}
               />
-              <button onClick={setClockProps}>✓</button>
+              {/* <button onClick={setClockProps}>✓</button> */}
+              <input type='color' value={clockFontColor} onChange={setClockFontColorUI} />
             </div>
           </div>
           <div>
