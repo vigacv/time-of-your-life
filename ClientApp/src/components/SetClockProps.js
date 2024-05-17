@@ -99,7 +99,8 @@ function SetClockProps(props) {
         {presets.map((p, i) => (
           <li key={p.id}>
             Preset {i + 1}:{' '}
-            {`Font: ${p.fontFamily}, Color: ${p.fontColor}, Title Size: ${p.titleFontSize}, Clock Size: ${p.clockFontSize}`}
+            {`Font: ${p.fontFamily}, Title Color: ${p.titleFontColor}, Title Size: ${p.titleFontSize},
+             Clock Size: ${p.clockFontSize}, Clock Color: ${p.clockFontColor}, Blink Colons: ${p.blinkColons}`}
           </li>
         ))}
       </ul>
