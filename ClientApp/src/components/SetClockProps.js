@@ -5,11 +5,11 @@ function SetClockProps(props) {
   const clockProps = new ClockProps()
   const [presets, setPresets] = useState([])
   const [loading, setLoading] = useState(true)
+  const [titleFontSize, setTitleFontSize] = useState(clockProps.titleFontSize)
+  const [clockFontSize, setClockFontSize] = useState(clockProps.clockFontSize)
   const titleRef = useRef(null)
   const fontFamilyRef = useRef(null)
   const fontColorRef = useRef(null)
-  const titleFontSizeRef = useRef(null)
-  const clockFontSizeRef = useRef(null)
   const blinkColonsRef = useRef(null)
 
   useEffect(() => {
@@ -24,8 +24,8 @@ function SetClockProps(props) {
   const getProps = () => {
     const props = new ClockProps()
     props.fontFamily = fontFamilyRef.current.value
-    props.titleFontSize = titleFontSizeRef.current.value
-    props.clockFontSize = clockFontSizeRef.current.value
+    props.titleFontSize = titleFontSize
+    props.clockFontSize = clockFontSize
     props.fontColor = fontColorRef.current.value
     props.blinkColons = blinkColonsRef.current.checked
     props.title = titleRef.current.value
@@ -42,6 +42,16 @@ function SetClockProps(props) {
       var option = <option>{size}</option>
       return option
     })
+  }
+
+  const setTitleFontSizeUI = (event) => {
+    setTitleFontSize(event.target.value)
+    setClockProps()
+  }
+
+  const setClockFontSizeUI = (event) => {
+    setClockFontSize(event.target.value)
+    setClockProps()
   }
 
   const handleEnter = (event) => {
@@ -125,17 +135,15 @@ function SetClockProps(props) {
           <div>
             <div>Title Font Size</div>
             <div>
-              <select id="titleFontSize" ref={titleFontSizeRef} defaultValue={clockProps.titleFontSize} onChange={setClockProps}>
-                {fontSizeOptions(clockProps.titleFontSize)}
-              </select>
+              <input type='range'  min='8' max='72' value={titleFontSize} onChange={setTitleFontSizeUI} />
+              <span>{titleFontSize}</span>
             </div>
           </div>
           <div>
             <div>Clock Font Size</div>
             <div>
-              <select id="clockFontSize" ref={clockFontSizeRef} defaultValue={clockProps.clockFontSize} onChange={setClockProps}>
-                {fontSizeOptions(clockProps.clockFontSize)}
-              </select>
+              <input type='range' min='8' max='72' value={clockFontSize} onChange={setClockFontSizeUI} />
+              <span>{clockFontSize}</span>
             </div>
           </div>
           <div>
