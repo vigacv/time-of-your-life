@@ -21,16 +21,17 @@ function Clock(props) {
   }
 
   let displayStyle = {
-    fontFamily: props.clockProps.fontFamily,
-    color: props.clockProps.fontColor,
+    fontFamily: props.clockProps.fontFamily
   }
 
   let titleStyle = {
     fontSize: `${props.clockProps.titleFontSize}pt`,
+    color: props.clockProps.titleFontColor,
   }
 
   let clockStyle = {
     fontSize: `${props.clockProps.clockFontSize}pt`,
+    color: props.clockProps.clockFontColor,
   }
 
   return (

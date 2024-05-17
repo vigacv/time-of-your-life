@@ -9,7 +9,8 @@ function SetClockProps(props) {
   const [clockFontSize, setClockFontSize] = useState(clockProps.clockFontSize)
   const titleRef = useRef(null)
   const fontFamilyRef = useRef(null)
-  const fontColorRef = useRef(null)
+  const titleFontColorRef = useRef(null)
+  const clockFontColorRef = useRef(null)
   const blinkColonsRef = useRef(null)
 
   useEffect(() => {
@@ -26,7 +27,8 @@ function SetClockProps(props) {
     props.fontFamily = fontFamilyRef.current.value
     props.titleFontSize = titleFontSize
     props.clockFontSize = clockFontSize
-    props.fontColor = fontColorRef.current.value
+    props.titleFontColor = titleFontColorRef.current.value
+    props.clockFontColor = clockFontColorRef.current.value
     props.blinkColons = blinkColonsRef.current.checked
     props.title = titleRef.current.value
     return props
@@ -35,13 +37,6 @@ function SetClockProps(props) {
   const setClockProps = () => {
     const setProps = getProps()
     props.setClockProps(setProps)
-  }
-
-  const fontSizeOptions = (selctedSize) => {
-    return clockProps.availableFontSizes.map((size) => {
-      var option = <option>{size}</option>
-      return option
-    })
   }
 
   const setTitleFontSizeUI = (event) => {
@@ -147,12 +142,24 @@ function SetClockProps(props) {
             </div>
           </div>
           <div>
-            <div>Font Color</div>
+            <div>Title Font Color</div>
             <div>
               <input
-                id="fontColor"
-                defaultValue={clockProps.fontColor}
-                ref={fontColorRef}
+                id="titleFontColor"
+                defaultValue={clockProps.titleFontColor}
+                ref={titleFontColorRef}
+                onKeyDown={handleEnter}
+              />
+              <button onClick={setClockProps}>✓</button>
+            </div>
+          </div>
+          <div>
+            <div>Clock Font Color</div>
+            <div>
+              <input
+                id="clockFontColor"
+                defaultValue={clockProps.clockFontColor}
+                ref={clockFontColorRef}
                 onKeyDown={handleEnter}
               />
               <button onClick={setClockProps}>✓</button>
