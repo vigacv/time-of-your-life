@@ -5,6 +5,7 @@ public record SaveClockPropsRequest(
     string FontFamily,
     int TitleFontSize,
     int ClockFontSize,
-    bool BlinkColons,
-    string FontColor
+    string TitleFontColor,
+    string ClockFontColor,
+    bool BlinkColons
 );

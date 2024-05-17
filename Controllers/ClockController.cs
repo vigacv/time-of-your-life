@@ -33,7 +33,8 @@ public class ClockController : ControllerBase
             TitleFontSize = preset.TitleFontSize,
             ClockFontSize = preset.ClockFontSize,
             BlinkColons = preset.BlinkColons,
-            FontColor = preset.FontColor
+            TitleFontColor = preset.TitleFontColor,
+            ClockFontColor = preset.ClockFontColor
         };
         _presets.Add(clockProps);
         return clockProps;

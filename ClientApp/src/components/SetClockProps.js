@@ -55,6 +55,29 @@ function SetClockProps(props) {
     }
   }
 
+  const savePreset = () => {
+    const preset = getProps()
+    fetch('clock/presets', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(preset),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('There was an error saving the preset.')
+        }
+        return response.json()
+      })
+      .then((data) => {
+        setPresets(prev => [...prev, data])
+      })
+      .catch((error) => {
+        console.error('Error:', error)
+      })
+  }
+
   const presetsDisplay = (() => {
     console.log(presets)
     return loading ? (
@@ -64,7 +87,7 @@ function SetClockProps(props) {
     ) : (
       <ul>
         {presets.map((p, i) => (
-          <li>
+          <li key={p.id}>
             Preset {i + 1}:{' '}
             {`Font: ${p.fontFamily}, Color: ${p.fontColor}, Title Size: ${p.titleFontSize}, Clock Size: ${p.clockFontSize}`}
           </li>
@@ -180,10 +203,7 @@ function SetClockProps(props) {
           <div>
             <div>
               <button
-                onClick={() =>
-                  alert('This should save the preset to the sever.')
-                }
-              >
+                onClick={savePreset}>
                 Save Preset
               </button>
             </div>
