@@ -19,6 +19,8 @@ Time of Your Life is built on these technologies:
 
 To develop on this project clone this project, and open with an IDE of your choice. VS Code or Visual Studio 2019 or newer is recommended.
 
+Update your database with `dotnet ef database update`
+
 The project can be run from the command line using the command `dotnet run`.  The service and application hosting can be stopped by pressing `Ctrl+C` on Windows and Linux, or `Cmd+C` on macOS.
 
 Changes to the React Client Side SPA, will be reflected in the UI in a hot load manner. Changes to the .Net server components will require a recompile, `dotnet build` and restart, `dotnet run`.

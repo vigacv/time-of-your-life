@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using time.Infrastructure;
 using time.Models;
 
 namespace time.Controllers;
@@ -9,25 +11,27 @@ namespace time.Controllers;
 [Route("[controller]")]
 public class ClockController : ControllerBase
 {
-    private static List<ClockProps> _presets = new List<ClockProps>(){ new() };
+    // private static List<ClockProps> _presets = new List<ClockProps>(){ new() };
 
     private readonly ILogger<ClockController> _logger;
+    private readonly ClockDbContext _dbContext;
 
-    public ClockController(ILogger<ClockController> logger)
+    public ClockController(ILogger<ClockController> logger, ClockDbContext dbContext)
     {
         _logger = logger;
+        _dbContext = dbContext;
     }
 
     [HttpGet, Route("presets")]
-    public IEnumerable<ClockProps> GetPresets()
+    public async Task<IEnumerable<ClockProps>> GetPresetsAsync()
     {
-        return _presets.ToArray();
+        return await _dbContext.ClockProps.ToListAsync();
     }
 
     [HttpGet, Route("presets/{id}")]
-    public IActionResult GetPreset(Guid id)
+    public async Task<IActionResult> GetPreset(Guid id)
     {
-        ClockProps? clockProps = _presets.FirstOrDefault(p => p.Id == id);
+        ClockProps? clockProps = await _dbContext.ClockProps.FindAsync(id);
 
         if (clockProps == null)
         {
@@ -38,7 +42,7 @@ public class ClockController : ControllerBase
     }
 
     [HttpPost("presets")]
-    public ClockProps AddPreset([FromBody]SaveClockPropsRequest preset)
+    public async Task<ClockProps> AddPreset([FromBody] SaveClockPropsRequest preset)
     {
         ClockProps clockProps = new ClockProps
         {
@@ -49,22 +53,23 @@ public class ClockController : ControllerBase
             TitleFontColor = preset.TitleFontColor,
             ClockFontColor = preset.ClockFontColor
         };
-        _presets.Add(clockProps);
+        await _dbContext.ClockProps.AddAsync(clockProps);
+
+        await _dbContext.SaveChangesAsync();
+
         return clockProps;
     }
 
     [HttpPut("presets/{id}")]
-    public IActionResult UpdatePreset(Guid id, [FromBody]SaveClockPropsRequest preset)
+    public async Task<IActionResult> UpdatePreset(Guid id, [FromBody] SaveClockPropsRequest preset)
     {
-        int index = _presets.FindIndex(p => p.Id == id);
+        ClockProps? clockProps = await _dbContext.ClockProps.FindAsync(id);
 
-        if (index == -1)
+        if (clockProps == null)
         {
             return NotFound();
         }
 
-        ClockProps clockProps = _presets[index];
-        
         clockProps.Title = preset.Title;
         clockProps.FontFamily = preset.FontFamily;
         clockProps.TitleFontSize = preset.TitleFontSize;
@@ -72,6 +77,8 @@ public class ClockController : ControllerBase
         clockProps.TitleFontColor = preset.TitleFontColor;
         clockProps.ClockFontColor = preset.ClockFontColor;
         clockProps.BlinkColons = preset.BlinkColons;
+
+        await _dbContext.SaveChangesAsync();
 
         return Ok(clockProps);
     }

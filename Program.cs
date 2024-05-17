@@ -1,8 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using time.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ClockDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DbConnectionString"))
+);
 
 var app = builder.Build();
 
